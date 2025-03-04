@@ -15,7 +15,13 @@
         <meta name="twitter:image:alt" content="Ziyue Liu's Portfolio Screenshot">
         <link rel="stylesheet" href="styles.css">
         <style> 
-            html[data-theme="dark"] {
+            main > section {
+                background: #222;
+                padding: 20px;
+                border-radius: 20px;
+                margin-top: 30px;
+            }
+            :root {
                 --primary-color: #0984e3;
                 --secondary-color: #5cace3;
                 --bg-dark: #111;
@@ -23,43 +29,18 @@
                 --bg-light: #333;
                 --text-primary: #fff;
                 --text-secondary: #bcbcbc;
-                --input-bg: #333;
+                --font-body: 'Asap', system-ui, -apple-system, sans-serif;
+                --font-heading: var(--font-body);
+                --base-size: 1rem;
+                --scale: 1.25;
+                --transition: all 0.3s ease;
                 --error-color: #e74c3c;
                 --warning-color: #f39c12;
                 --success-color: #2ecc71;
-                --border-color: #444;
-            }
-
-            html[data-theme="light"] {
-                --primary-color: #0984e3;
-                --secondary-color: #3498db;
-                --bg-dark: #f5f5f5;
-                --bg-medium: #ffffff;
-                --bg-light: #f0f0f0;
-                --text-primary: #333;
-                --text-secondary: #555;
-                --input-bg: #ffffff;
-                --error-color: #e74c3c;
-                --warning-color: #f39c12;
-                --success-color: #2ecc71;
-                --border-color: #ddd;
-            }
-
-                main > section {
-                    background: #222;
-                    padding: 20px;
-                    border-radius: 20px;
-                    margin-top: 30px;
-                }
-                * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                transition: background-color 0.3s, color 0.3s, border-color 0.3s;
             }
 
             body {
-                font-family: 'Asap', system-ui, -apple-system, sans-serif;
+                font-family: var(--font-body);
                 background-color: var(--bg-dark);
                 color: var(--text-primary);
                 line-height: 1.6;
@@ -72,7 +53,6 @@
                 border-radius: 1rem;
                 max-width: 600px;
                 margin: 0 auto;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
 
             .section-heading {
@@ -92,67 +72,6 @@
                 background: currentColor;
             }
 
-            /* Theme toggle styles */
-            .theme-toggle-container {
-                display: flex;
-                justify-content: flex-end;
-                margin-bottom: 1rem;
-            }
-
-            .theme-toggle {
-                background: var(--bg-light);
-                border: 2px solid var(--border-color);
-                border-radius: 1.5rem;
-                width: 3rem;
-                height: 1.5rem;
-                position: relative;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                padding: 0.25rem;
-                transition: all 0.3s ease;
-            }
-
-            .toggle-thumb {
-                position: absolute;
-                height: 1.2rem;
-                width: 1.2rem;
-                border-radius: 50%;
-                background: var(--primary-color);
-                left: 0.15rem;
-                transition: transform 0.3s ease;
-            }
-
-            html[data-theme="light"] .toggle-thumb {
-                transform: translateX(1.5rem);
-            }
-
-            .toggle-icon {
-                position: absolute;
-                color: var(--text-primary);
-                font-size: 0.75rem;
-                transition: opacity 0.3s ease;
-            }
-
-            .sun-icon {
-                right: 0.4rem;
-                opacity: 0;
-            }
-
-            .moon-icon {
-                left: 0.4rem;
-                opacity: 1;
-            }
-
-            html[data-theme="light"] .sun-icon {
-                opacity: 1;
-            }
-
-            html[data-theme="light"] .moon-icon {
-                opacity: 0;
-            }
-
-            /* Form styles */
             .contact-form {
                 display: flex;
                 flex-direction: column;
@@ -177,13 +96,13 @@
 
             input, textarea {
                 padding: 0.75rem;
-                background-color: var(--input-bg);
-                border: 2px solid var(--border-color);
+                background-color: var(--bg-light);
+                border: 2px solid transparent;
                 border-radius: 0.5rem;
                 color: var(--text-primary);
-                font-family: inherit;
-                font-size: 1rem;
-                transition: all 0.3s ease;
+                font-family: var(--font-body);
+                font-size: var(--base-size);
+                transition: var(--transition);
             }
 
             input:focus, textarea:focus {
@@ -201,7 +120,7 @@
                 text-align: right;
                 font-size: 0.85rem;
                 color: var(--text-secondary);
-                transition: all 0.3s ease;
+                transition: var(--transition);
             }
 
             .char-counter.warning {
@@ -218,7 +137,7 @@
 
             @keyframes flash {
                 0%, 100% { 
-                    border-color: var(--border-color); 
+                    border-color: transparent; 
                 }
                 50% { 
                     border-color: var(--error-color); 
@@ -226,71 +145,7 @@
                 }
             }
 
-            button {
-                padding: 0.75rem 1.5rem;
-                background-color: var(--primary-color);
-                color: #fff;
-                font-weight: bold;
-                border: none;
-                border-radius: 0.5rem;
-                cursor: pointer;
-                font-size: 1rem;
-                transition: all 0.3s ease;
-                align-self: flex-start;
-            }
 
-            button:hover {
-                background-color: var(--secondary-color);
-                transform: translateY(-2px);
-            }
-
-            button:disabled {
-                background-color: var(--bg-light);
-                cursor: not-allowed;
-                transform: none;
-            }
-
-            .outputs-container {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-                margin-top: 1rem;
-            }
-
-            output {
-                padding: 0.75rem;
-                border-radius: 0.5rem;
-                min-height: 2rem;
-                transition: opacity 0.5s ease;
-            }
-
-            #errorOutput {
-                background-color: rgba(231, 76, 60, 0.2);
-                color: var(--error-color);
-            }
-
-            #infoOutput {
-                background-color: rgba(46, 204, 113, 0.2);
-                color: var(--success-color);
-            }
-
-            .fade-out {
-                opacity: 0;
-            }
-
-            .no-js-message {
-                display: none;
-                background-color: var(--warning-color);
-                color: #fff;
-                padding: 0.5rem;
-                border-radius: 0.25rem;
-                margin-bottom: 1rem;
-                text-align: center;
-            }
-
-            html.no-js .no-js-message {
-                display: block;
-            }
 
         </style>
         <title>Ziyue Liu's Personal Site</title>
@@ -631,59 +486,26 @@
             </section>
 
             <section id="Contact-Form" class="contact-section">
-                <div class="theme-toggle-container">
-                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
-                        <span class="toggle-thumb"></span>
-                        <span class="toggle-icon moon-icon">🌙</span>
-                        <span class="toggle-icon sun-icon">☀️</span>
-                    </button>
-                </div>
-        
-                <div class="no-js-message">
-                    <p>Theme switching requires JavaScript. Basic form functionality is available without JavaScript.</p>
-                </div>
                 <h2 class="section-heading">Contact Form</h2>
-                <form id="contactForm" action="https://httpbin.org/post" method="post" class="contact-form" novalidate>
+                <form id="contactForm" action="https://httpbin.org/post" method="post" class="contact-form">
                     <div class="form-group">
                         <label for="name" class="required">Name</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            placeholder="Your name" 
-                            required 
-                            minlength="2" 
-                            maxlength="50" 
-                            pattern="[A-Za-z\s\-']+"
-                            aria-required="true">
+                        <input type="text" id="name" name="name" required aria-required="true">
                     </div>
                     
                     <div class="form-group">
                         <label for="email" class="required">Email</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            placeholder="Your email address" 
-                            required 
-                            pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" 
-                            aria-required="true">
+                        <input type="email" id="email" name="email" required aria-required="true">
                     </div>
                     
                     <div class="form-group">
                         <label for="comments">Comments</label>
-                        <textarea 
-                            id="comments" 
-                            name="comments" 
-                            placeholder="Your comments or message (optional)" 
-                            maxlength="200"></textarea>
-                        <div class="char-counter" id="commentsCounter">200 characters remaining</div>
+                        <textarea id="comments" name="comments"></textarea>
                     </div>
                     
                     <input type="hidden" name="possible_bot" value="true">
-                    <input type="hidden" name="form-errors" id="formErrorsField" value="">
                     
-                    <button type="submit" id="submitButton">Submit</button>
+                    <button type="submit">Submit</button>
                     
                     <div class="outputs-container">
                         <output id="errorOutput" aria-live="assertive"></output>
@@ -721,186 +543,43 @@
             <a href="https://www.mozilla.org/">External Link</a>
         </noscript>
         <script>
-                document.documentElement.classList.remove('no-js');
-
-        const themeToggle = document.getElementById('themeToggle');
-        const htmlElement = document.documentElement;
-
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            htmlElement.setAttribute('data-theme', savedTheme);
-        }
-
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-
-        const form = document.getElementById('contactForm');
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const commentsInput = document.getElementById('comments');
-        const commentsCounter = document.getElementById('commentsCounter');
-        const errorOutput = document.getElementById('errorOutput');
-        const infoOutput = document.getElementById('infoOutput');
-        const formErrorsField = document.getElementById('formErrorsField');
-
-        let form_errors = [];
-
-        const maxCommentLength = 200;
-
-        function showError(message) {
-            errorOutput.textContent = message;
-            errorOutput.classList.remove('fade-out');
-            
-            // Auto-fade after 3 seconds
-            setTimeout(() => {
-                errorOutput.classList.add('fade-out');
-            }, 3000);
-        }
-
-        function logError(fieldName, errorType, errorMessage) {
-            const timestamp = new Date().toISOString();
-            form_errors.push({
-                field: fieldName,
-                type: errorType,
-                message: errorMessage,
-                timestamp: timestamp
+            const form = document.getElementById('contactForm');
+            const errorOutput = document.getElementById('errorOutput');
+            const infoOutput = document.getElementById('infoOutput');
+    
+            form.addEventListener('submit', function(event) {
+                // Clear previous messages
+                errorOutput.textContent = '';
+                infoOutput.textContent = '';
+                
+                // Validate form
+                let valid = true;
+                
+                const name = document.getElementById('name');
+                const email = document.getElementById('email');
+                
+                if (!name.value.trim()) {
+                    errorOutput.textContent = 'Name is required';
+                    valid = false;
+                }
+                
+                if (!email.value.trim()) {
+                    errorOutput.textContent = errorOutput.textContent 
+                        ? errorOutput.textContent + ' and Email is required' 
+                        : 'Email is required';
+                    valid = false;
+                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                    errorOutput.textContent = 'Please enter a valid email address';
+                    valid = false;
+                }
+                
+                if (valid) {
+                    infoOutput.textContent = 'Form submitted successfully!';
+                    // We're allowing the form to submit naturally to httpbin.org
+                } else {
+                    event.preventDefault();
+                }
             });
-            
-            formErrorsField.value = JSON.stringify(form_errors);
-        }
-
-        nameInput.addEventListener('input', (event) => {
-            const input = event.target;
-            const originalValue = input.value;
-            const lastChar = originalValue.slice(-1);
-            
-            if (lastChar && !/[A-Za-z\s\-']/.test(lastChar)) {
-                // Remove the invalid character
-                input.value = originalValue.slice(0, -1);
-                
-                input.classList.add('error-highlight');
-                setTimeout(() => {
-                    input.classList.remove('error-highlight');
-                }, 500);
-                
-                showError(`Invalid character '${lastChar}' in name field`);
-                logError('name', 'invalid_character', `Invalid character '${lastChar}' in name field`);
-            }
-            
-            if (input.validity.tooShort) {
-                input.setCustomValidity(`Name must be at least ${input.minLength} characters`);
-            } 
-            else if (input.validity.patternMismatch) {
-                input.setCustomValidity("Name can only contain letters, spaces, hyphens, and apostrophes");
-            } 
-            else if (input.validity.valueMissing) {
-                input.setCustomValidity("Please enter your name");
-            } 
-            else {
-                input.setCustomValidity("");
-            }
-        });
-
-        emailInput.addEventListener('input', (event) => {
-            const input = event.target;
-            const originalValue = input.value;
-            const lastChar = originalValue.slice(-1);
-            
-            if (lastChar && !/[a-zA-Z0-9.@_%+\-]/.test(lastChar)) {
-                input.value = originalValue.slice(0, -1);
-                
-                input.classList.add('error-highlight');
-                setTimeout(() => {
-                    input.classList.remove('error-highlight');
-                }, 500);
-                
-                showError(`Invalid character '${lastChar}' in email field`);
-                logError('email', 'invalid_character', `Invalid character '${lastChar}' in email field`);
-            }
-            
-            if (input.validity.valueMissing) {
-                input.setCustomValidity("Please enter your email address");
-            } 
-            else if (input.validity.typeMismatch || input.validity.patternMismatch) {
-                input.setCustomValidity("Please enter a valid email address");
-            } 
-            else {
-                input.setCustomValidity("");
-            }
-        });
-
-        commentsInput.addEventListener('input', (event) => {
-            const input = event.target;
-            const remaining = maxCommentLength - input.value.length;
-            commentsCounter.textContent = `${remaining} characters remaining`;
-            
-            commentsCounter.className = 'char-counter';
-            if (remaining <= 50 && remaining > 20) {
-                commentsCounter.classList.add('warning');
-            } else if (remaining <= 20) {
-                commentsCounter.classList.add('danger');
-            }
-            
-            if (input.value.length > maxCommentLength) {
-                input.value = input.value.substring(0, maxCommentLength);
-                showError(`Comments cannot exceed ${maxCommentLength} characters`);
-                logError('comments', 'max_length_exceeded', `Comments cannot exceed ${maxCommentLength} characters`);
-            }
-        });
-
-        // Form submission handler
-        form.addEventListener('submit', (event) => {
-            // Check validity of all fields
-            let isValid = true;
-            
-            // Clear outputs
-            errorOutput.textContent = '';
-            infoOutput.textContent = '';
-            
-            // Check name field
-            if (!nameInput.validity.valid) {
-                isValid = false;
-                showError(nameInput.validationMessage);
-                logError('name', 'validation_error', nameInput.validationMessage);
-            }
-            
-            // Check email field
-            if (!emailInput.validity.valid) {
-                isValid = false;
-                showError(emailInput.validationMessage);
-                logError('email', 'validation_error', emailInput.validationMessage);
-            }
-            
-            // If valid, allow submission
-            if (isValid) {
-                infoOutput.textContent = 'Form submitted successfully!';
-                // Let form submit naturally to httpbin.org
-            } else {
-                event.preventDefault();
-            }
-        });
-
-        commentsCounter.textContent = `${maxCommentLength} characters remaining`;
-
-        function logError(fieldName, errorType, errorMessage) {
-            const timestamp = new Date().toISOString();
-            form_errors.push({
-                field: fieldName,
-                type: errorType,
-                message: errorMessage,
-                timestamp: timestamp
-            });
-            
-            // Update the hidden field with JSON encoded errors
-            formErrorsField.value = JSON.stringify(form_errors);
-        }
-
-
         </script>
     
     </body>
